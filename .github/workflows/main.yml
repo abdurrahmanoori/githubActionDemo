@@ -1,0 +1,19 @@
+name: Run on PR Merge
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  run-after-merge:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Confirm merge
+        run: |
+          echo "Merged by: ${{ github.actor }}"
+          echo "Target branch: ${{ github.base_ref }}"
